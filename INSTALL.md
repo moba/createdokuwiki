@@ -109,14 +109,20 @@ Read https://www.dokuwiki.org/farms
     wget https://www.dokuwiki.org/_media/dokuwiki_farm_animal.zip
     unzip dokuwiki_farm_animal.zip
 
-    cp _animal prototype.example.com
+    mv _animal prototype.example.com
     chown www-data:www-data -R prototype.example.com 
 
 If you have a wildcard DNS entry for your domain, you should now be able to access `prototype.example.com`. Default login is `admin`, password `admin`. Reconfigure it to your liking. This will become your prototype for other animals.
 
+Since we don't want the prototype to stay public, we rename it back to `_animal`.
+
+    mv prototype.example.com _animal
+ 
 To create a new animal by hand, you simply have to copy the directory:
 
-    cp -a prototype.example.com shiny.example.com
+    cp -a _animal shiny.example.com
+
+`createwiki` expects the prototype to have this name.
 
 Useful plugins & templates
 --------------------------
