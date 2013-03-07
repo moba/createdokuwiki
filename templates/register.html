@@ -1,0 +1,29 @@
+<!doctype html>
+<title>Create New Wiki - informatick.net</title>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<h1>Create a new wiki</h1>
+<form action="#" method=post>
+  <dl>
+    <dt>Email:
+    <dd><input type=text name=email value="{{ request.form.email }}">
+    <dt>Domain:
+    <dd><input type=text name=subdomain>
+    <select name=domain>
+      {% for domain in domains %}
+          <option>.{{ domain }}</option>
+      {% endfor %}
+    </select>
+    <dt>Invite Code:
+    <dd><input type=text name=invitecode>
+   </dl>
+  <p><input type=submit value=Register>
+  </form>
+  <p>Don't forget to <a href="https://lists.informatick.net/listinfo/dokuwiki">subscribe to our mailing list</a>!

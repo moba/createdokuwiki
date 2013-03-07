@@ -1,0 +1,13 @@
+<!doctype html>
+<title>Awaiting Confirmation - informatick.net</title>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<h1>You will receive an email shortly.</h1>
+Please click the link in the mail to confirm your registration.

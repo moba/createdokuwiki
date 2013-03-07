@@ -1,0 +1,13 @@
+<!doctype html>
+<title>New Wiki created - informatick.net</title>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<h1>Your wiki has been created. Yay!</h1>
+Log in to your wiki using username <b>admin</b> and password <b>headstrong</b>. You should immediately log in and change the password. Do it NOW :-)
