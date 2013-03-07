@@ -250,6 +250,9 @@ Make active:
     /etc/init.d/uwsgi start
     /etc/init.d/nginx reload
 
+Additional setup nodes
+======================
+
 Mail
 ----
 
@@ -277,6 +280,11 @@ Create hashed database, secure, and reload postfix:
     chown root:root /etc/postfix/smtp_auth*
     chmod 600 /etc/postfix/smtp_auth*
     /etc/init.d/postfix reload
+
+Monitoring
+----------
+
+You should monitor your server. I like munin. It is easy to set up, but this and a few other general server installation notes are out of scope. I have documented munin and other server related stuff without a lot of comments at https://github.com/moba/installnotes/
 
 Enjoy!
 ======
