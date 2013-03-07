@@ -250,7 +250,7 @@ Make active:
     /etc/init.d/uwsgi start
     /etc/init.d/nginx reload
 
-Additional setup nodes
+Additional setup notes
 ======================
 
 Mail
