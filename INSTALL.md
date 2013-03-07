@@ -103,6 +103,7 @@ Read https://www.dokuwiki.org/farms
     if(!defined('DOKU_FARMDIR')) define('DOKU_FARMDIR', '/var/www/farm');
     include(fullpath(dirname(__FILE__)).'/farm.php');
 
+#### Create prototype animal
 
     cd /var/www/farm
     wget https://www.dokuwiki.org/_media/dokuwiki_farm_animal.zip
@@ -124,6 +125,7 @@ Useful plugins & templates
     git clone https://github.com/splitbrain/dokuwiki-plugin-captcha.git captcha
     git clone https://github.com/marklundeberg/dokuwiki-plugin-backup.git backup
     git clone https://github.com/lupo49/plugin-cspheader.git cspheader
+
     cd /var/www/dokuwiki/lib/tpl
     git clone https://github.com/syn-systems/dokuwiki-template-monobook.git monobook
     git clone https://github.com/samfisch/dokuwiki-template-arctic.git arctic
@@ -170,13 +172,14 @@ For public farms, you want to restrict some configuration settings and disable t
 I limit public animals to 1 MB file uploads.
 
 #### /etc/php5/conf.d/hosts.ini
-[PATH=/var/www/]
-open_basedir = /var/www/
-upload_tmp_dir=/var/www/tmp
-session.save_path=/var/www/tmp
-allow_url_fopen = Off
-upload_max_filesize = 1M
-disable_functions = exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,show_source,chroot,chdir,fsockopen,pfsockopen,socket_create,socket_create_listen,phpinfo
+
+    [PATH=/var/www/]
+    open_basedir = /var/www/
+    upload_tmp_dir=/var/www/tmp
+    session.save_path=/var/www/tmp
+    allow_url_fopen = Off
+    upload_max_filesize = 1M
+    disable_functions = exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,show_source,chroot,chdir,fsockopen,pfsockopen,socket_create,socket_create_listen,phpinfo
 
 Createwiki Web Interface
 ------------------------
@@ -215,6 +218,10 @@ Createwiki Web Interface
             }
     
     }
+
+Make active:
+
+    ln -s /etc/nginx/sites-available/createwiki /etc/nginx/sites-enabled
     
 #### /etc/uwsgi/apps-available/createwiki.ini 
 
