@@ -14,8 +14,9 @@ app.secret_key = 'qoifj329fOKo32fkAOKQokweoekfeofkeokfewoFKOEwfk'; # change this
 DOMAINS = ['example.net', 'example.com']  
 FARM_LOCATION = '/var/www/farm/'
 ADMIN = 'admin@example.com'     # receives confirmation on creation  
+SENDER = 'no-reply@example.com'
 INVITECODES = ['INVITE1', 'INVITE2', 'INVITE3']     # must be all uppercase to match!
-MAIL_PREPEND = '[Informatick] '     # subject 
+MAIL_PREPEND = '[Informatick] '     # will be prepended to mail subject 
 
 mail = Mail(app)
 
@@ -70,18 +71,15 @@ def confirm(token):
     return render_template('error.html')
 
 def send_awaiting_confirm_mail(email,token):
-    """
-    Send the awaiting for confirmation mail to the user.
-    """
     subject = MAIL_PREPEND + "Welcome to your new wiki!"
-    msg = Message(subject=subject, recipients=[email], sender='no-reply@informatick.net')
+    msg = Message(subject=subject, recipients=[email], sender=SENDER)
     confirmation_url = url_for('confirm', token=token, _external=True) 
     msg.body = "Please click here to confirm: %s" % (confirmation_url) 
     mail.send(msg)
 
 def send_notice_to_admin(domain):
     subject = MAIL_PREPEND + "created " + domain
-    msg = Message(subject=subject, recipients=[ADMIN], sender='no-reply@informatick.net')
+    msg = Message(subject=subject, recipients=[ADMIN], sender=SENDER)
     msg.body = "New reg"
     mail.send(msg)
 
