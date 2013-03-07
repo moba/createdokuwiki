@@ -144,7 +144,7 @@ For public farms, you want to restrict some configuration settings and disable t
  
     rm -r /var/www/dokuwiki/lib/plugins/plugin/
 
-#### /var/www/farm/prototype.example.com/conf/local.protected.php
+#### /var/www/farm/_animal/conf/local.protected.php
 
     $conf['savedir'] = DOKU_CONF.'../data';
     $conf['updatecheck'] = 0;
@@ -175,7 +175,7 @@ For public farms, you want to restrict some configuration settings and disable t
 
 ### Harden PHP
 
-I limit public animals to 1 MB file uploads.
+This disables several functions for PHP as a security precaution. I also limit public animals to 1 MB file uploads.
 
 #### /etc/php5/conf.d/hosts.ini
 
@@ -193,6 +193,25 @@ Createwiki Web Interface
 ### Set up UWSGI for Python in Nginx
 
     apt-get install python uwsgi uwsgi-plugin-python
+
+#### /etc/uwsgi/apps-available/createwiki.ini
+
+    [uwsgi]
+    plugins = python
+    gid = www-data
+    uid = www-data
+    vhost = true
+    logdate
+    socket = /tmp/uwsgi-createwiki.sock
+    master = true
+    processes = 1
+    harakiri = 20
+    limit-as = 128
+    memory-report
+    no-orphans
+    catch-exceptions
+
+### Install Createwiki
 
     git clone https://github.com/moba/createdokuwiki.git /var/www/createwiki/
     
@@ -228,23 +247,8 @@ Createwiki Web Interface
 Make active:
 
     ln -s /etc/nginx/sites-available/createwiki /etc/nginx/sites-enabled
-    
-#### /etc/uwsgi/apps-available/createwiki.ini 
-
-    [uwsgi]
-    plugins = python
-    gid = www-data
-    uid = www-data
-    vhost = true
-    logdate
-    socket = /tmp/uwsgi-createwiki.sock
-    master = true
-    processes = 1
-    harakiri = 20
-    limit-as = 128
-    memory-report
-    no-orphans
-    catch-exceptions
+    /etc/init.d/uwsgi start
+    /etc/init.d/nginx reload
 
 Enjoy!
 ======
