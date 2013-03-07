@@ -250,5 +250,33 @@ Make active:
     /etc/init.d/uwsgi start
     /etc/init.d/nginx reload
 
+Mail
+----
+
+Createwiki sends confirm links to users, and registration notices to the admin (you). For this, you need a working mail setup. I use postfix with TLS and a 'relayhost'.
+
+    apt-get install postfix libsasl2-modules 
+
+#### /etc/postfix/main.cf (excerpt)
+
+    mydestination = localhost
+    relayhost = smtp.upstream.ext
+    mynetworks = 127.0.0.0/8
+    mydomain = example.com 
+    smtp_tls_security_level = encrypt
+    smtp_sasl_auth_enable = yes
+    smtp_sasl_password_maps = hash:/etc/postfix/smtp_auth
+    smtp_sasl_security_options = noanonymous
+    
+#### /etc/postfix/smtp_auth
+    smtp.upstream.ext	username:password
+    
+Create hashed database, secure, and reload postfix:
+    
+    postmap /etc/postfix/smtp_auth
+    chown root:root /etc/postfix/smtp_auth*
+    chmod 600 /etc/postfix/smtp_auth*
+    /etc/init.d/postfix reload
+
 Enjoy!
 ======
