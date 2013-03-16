@@ -35,7 +35,8 @@ def register():
 	            flash("invalid input", 'error')
                 else:
                     domain = subdomain + '.' + domain
-                    if exists(domain):
+                    domain = domain.lower()
+		    if exists(domain):
 	                flash("name already taken, sorry", 'error')
 	            else:
                         token = randomtoken()
