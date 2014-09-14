@@ -21,7 +21,7 @@ I don't want to keep IP logs, so I put the farm behind a reverse proxy and drop 
 	access_log /dev/null;
 	error_log /dev/null;
 	location / {
-		proxy_pass http://unix:/var/run/nginx.sock:/;
+		proxy_pass http://127.0.0.1/;
 		proxy_cache_key "$host$request_uri$cookie_user";
 		proxy_set_header Host $http_host;
                 proxy_hide_header X-Powered-By;
